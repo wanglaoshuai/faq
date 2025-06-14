@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的世界服务器帮助指南</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        accent: '#722ED1',
+                        success: '#00B42A',
+                        warning: '#FF7D00',
+                        danger: '#F53F3F',
+                        dark: '#1D2129',
+                        light: '#F7F8FA'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .tag-badge {
+                @apply inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+            }
+            .paragraph-marker {
+                @apply inline-block w-6 h-6 rounded-full bg-primary text-white text-xs flex items-center justify-center mr-2;
+            }
+            .section-title {
+                @apply text-[clamp(1.5rem,3vw,2rem)] font-bold text-dark mb-4 border-b border-gray-200 pb-2;
+            }
+            .sub-section-title {
+                @apply text-[clamp(1.2rem,2vw,1.5rem)] font-semibold text-dark mb-3 mt-6;
+            }
+            .nav-link {
+                @apply flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 hover:bg-gray-50;
+            }
+            .nav-link.active {
+                @apply bg-primary/10 text-primary border-l-4 border-primary;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-light text-dark min-h-screen flex flex-col">
+    <!-- 顶部导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-gamepad text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold text-dark">我的世界服务器帮助指南</h1>
+            </div>
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="#connection" class="text-gray-600 hover:text-primary transition-colors">连接服务器</a>
+                <a href="#configuration" class="text-gray-600 hover:text-primary transition-colors">游戏配置</a>
+                <a href="#ban-solution" class="text-gray-600 hover:text-primary transition-colors">IP封禁解决</a>
+                <a href="#common-issues" class="text-gray-600 hover:text-primary transition-colors">常见问题</a>
+                <a href="#plugins" class="text-gray-600 hover:text-primary transition-colors">插件功能</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 移动端菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+        <div class="container mx-auto px-4 py-2">
+            <a href="#connection" class="block py-2 text-gray-600 hover:text-primary transition-colors">连接服务器</a>
+            <a href="#configuration" class="block py-2 text-gray-600 hover:text-primary transition-colors">游戏配置</a>
+            <a href="#ban-solution" class="block py-2 text-gray-600 hover:text-primary transition-colors">IP封禁解决</a>
+            <a href="#common-issues" class="block py-2 text-gray-600 hover:text-primary transition-colors">常见问题</a>
+            <a href="#plugins" class="block py-2 text-gray-600 hover:text-primary transition-colors">插件功能</a>
+        </div>
+    </div>
+
+    <!-- 主要内容区 -->
+    <main class="flex-grow container mx-auto px-4 py-6 md:py-10">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- 侧边导航 -->
+            <aside class="lg:w-64 hidden lg:block sticky top-20">
+                <div class="bg-white rounded-lg shadow-sm p-4 h-fit">
+                    <h2 class="font-semibold text-lg mb-4 text-dark">目录</h2>
+                    <nav id="table-of-contents">
+                        <ul class="space-y-1">
+                            <li><a href="#welcome" class="nav-link" data-target="welcome">欢迎加入</a></li>
+                            <li><a href="#connection" class="nav-link" data-target="connection">一、连接服务器</a></li>
+                            <li><a href="#configuration" class="nav-link" data-target="configuration">二、游戏配置</a></li>
+                            <li><a href="#ban-solution" class="nav-link" data-target="ban-solution">三、被Ban IP解决办法</a></li>
+                            <li><a href="#common-issues" class="nav-link" data-target="common-issues">四、游戏内常见问题解决</a></li>
+                            <li><a href="#interaction" class="nav-link" data-target="interaction">五、与其他玩家互动问题</a></li>
+                            <li><a href="#plugins" class="nav-link" data-target="plugins">六、使用插件功能</a></li>
+                            <li><a href="#skins" class="nav-link" data-target="skins">七、显示离线玩家皮肤</a></li>
+                            <li><a href="#other-help" class="nav-link" data-target="other-help">八、其他帮助途径</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- 文档内容 -->
+            <article class="lg:w-full">
+                <section id="welcome" class="mb-10">
+                    <h1 class="section-title">FAQ - 服务器成员帮助指南</h1>
+                    <p class="text-gray-700 mb-4">欢迎各位小伙伴加入我们的《我的世界》生电或者是机械动力服务器！此文档适用于疑难解答。</p>
+                    <p class="text-gray-700">适用于超绝生电服务器（1.21.4）和王老帅与lizhiMC服务器（机械动力1.19.2）这两个服务器的帮助。</p>
+                </section>
+
+                <section id="connection" class="mb-10">
+                    <h2 class="sub-section-title">一、连接服务器</h2>
+                    
+                    <h3 class="text-lg font-semibold text-dark mb-3 mt-4">游戏链接获取</h3>
+                    <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+                        <li>官方渠道：若你尚未下载《我的世界》游戏，可前往官方网站（<a href="https://minecraft.net" class="text-primary hover:underline" target="_blank">minecraft.net</a>）进行下载。官网提供了针对不同系统（如 Windows、Mac、Linux 以及移动设备的 iOS 和 Android 系统）的游戏版本，根据自己的设备类型选择对应的下载选项即可。</li>
+                        <li>游戏平台：在一些游戏平台也能获取《我的世界》，例如微软商店（适用于 Windows 系统），打开微软商店后，在搜索栏输入 “Minecraft”，找到游戏后点击下载安装。对于主机玩家，如 Xbox、PlayStation 等，可在对应的主机游戏商店中搜索并下载《我的世界》。</li>
+                        <li>离线玩家请下载第三方启动器，如pcl2等等进行下载</li>
+                    </ol>
+                    
+                    <h3 class="text-lg font-semibold text-dark mb-3 mt-4">基岩版连接</h3>
+                    <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+                        <li>打开游戏后，点击主界面的 “游玩” 选项。</li>
+                        <li>加入公开服务器：在 “服务器” 分页浏览在线服务器列表，找到我们的服务器后点击 “加入服务器”。若没找到，确认服务器是否正常开启，或联系管理员询问。</li>
+                        <li>加入特定服务器：向管理员获取服务器地址，在服务器分页底部点击 “新增服务器”，填好名称和地址后点击 “储存”，后续就能从列表中快速加入。</li>
+                    </ol>
+                    
+                    <h3 class="text-lg font-semibold text-dark mb-3 mt-4">Java 版连接</h3>
+                    <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+                        <li>启动游戏，在主菜单点击 “多人游戏”。</li>
+                        <li>连接线上服务器：获取服务器地址后，点击 “直接连线” 输入地址连接；或点击 “新增服务器” 输入信息保存，方便下次加入。</li>
+                        <li>版本检查：连接失败若提示版本不匹配，在游戏启动器切换到与服务器一致的版本。有些启动器可在设置中添加特定版本核心，下载切换后再尝试连接。</li>
+                    </ol>
+                </section>
+
+                <section id="configuration" class="mb-10">
+                    <h2 class="sub-section-title">二、游戏配置</h2>
+                    
+                    <h3 class="text-lg font-semibold text-dark mb-3 mt-4">基岩版配置</h3>
+                    <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+                        <li>图形设置：进入游戏后，点击主菜单中的 “设置” 选项，选择 “视频” 标签。在这里，你可以调整分辨率，降低分辨率能提升游戏流畅度，例如从 1920x1080 调整为 1366x768。同时，将 “图形” 品质设置为 “流畅”，关闭 “光影” 效果，减少设备图形处理压力。</li>
+                        <li>音效设置：在 “设置” 的 “声音” 标签下，可根据喜好调整背景音乐、音效等音量大小。如果想减少游戏对系统资源的占用，也可以适当降低音效质量或关闭部分音效。</li>
+                        <li>控制设置：在 “设置” 的 “控制” 标签中，自定义操作方式，如调整移动、跳跃、攻击等按键，让操作更符合自己的习惯，提高游戏操控体验。</li>
+                    </ol>
+                    
+                    <h3 class="text-lg font-semibold text-dark mb-3 mt-4">Java 版配置</h3>
+                    <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+                        <li>启动器设置：打开 Java 版启动器，点击 “启动选项”。在 “Java 设置” 部分，可根据电脑配置调整内存分配，例如电脑内存充足，可将 “最大内存” 设置为 4096M（4GB），以提升游戏运行性能；若电脑内存有限，适当降低内存分配，避免游戏卡顿。同时，确保 Java 版本与游戏版本兼容，可在 “Java 路径” 中选择正确的 Java 安装目录。</li>
+                        <li>游戏内设置：进入游戏后，在主菜单点击 “选项”。在 “视频设置” 中，同样可调整分辨率、图形品质（如将 “渲染距离” 调小，从 16 降低到 8）、关闭 “平滑光照” 等，优化游戏画面显示效果，提升流畅度。在 “音频设置” 中，调节声音相关参数，在 “控制设置” 中自定义按键操作。</li>
+                    </ol>
+                </section>
+
+                <section id="ban-solution" class="mb-10">
+                    <h2 class="sub-section-title">三、被 Ban IP 解决办法</h2>
+                    <ol class="list-decimal pl-5 space-y-3 text-gray-700">
+                        <li>
+                            <strong>联系管理员申诉</strong>：若发现自己的 IP 被服务器封禁，首先要保持冷静。通过我们的服务器官方交流群、论坛私信或管理员提供的其他联系方式，礼貌地向管理员说明情况。详细阐述自己是否存在误操作或可能导致封禁的原因，请求管理员核实并解除封禁。例如，你可以这样表述：“管理员您好，我发现自己的 IP 无法连接服务器，想询问是否被封禁。我一直遵守服务器规则，不知是否存在误封情况，希望您能帮忙核实并解除封禁，非常感谢！”
+                        </li>
+                        <li>
+                            <strong>检查自身网络问题</strong>：在等待管理员回复期间，检查自身网络是否存在异常。确认网络连接是否稳定，可尝试访问其他网站或在线服务，看是否能正常加载。检查防火墙或安全软件设置，确保没有阻止《我的世界》游戏程序访问网络。如果使用路由器，查看路由器的访问控制列表，看是否存在限制自身 IP 访问的规则。
+                        </li>
+                        <li>
+                            <strong>特殊情况处理</strong>：若管理员确认封禁原因合理且无法解除，而你确定后续会遵守规则，可尝试与管理员沟通解封期限。若封禁时间较长，且你急切想继续游戏，在了解服务器规则允许的前提下，可考虑使用合法的网络代理服务（如部分地区允许的 VPN）来更换 IP 地址，但务必注意使用此类服务需遵守相关法律法规以及服务器规则，避免造成更严重的违规。
+                        </li>
+                    </ol>
+                </section>
+
+                <section id="common-issues" class="mb-10">
+                    <h2 class="sub-section-title">四、游戏内常见问题解决</h2>
+                    
+                    <h3 class="text-lg font-semibold text-dark mb-3 mt-4">无法正常游戏</h3>
+                    
+                    <h4 class="text-md font-medium text-dark mb-2 mt-3">游戏卡顿</h4>
+                    <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+                        <li>自身设备原因：降低游戏图形设置，比如调低分辨率、关闭光影特效，减轻设备运行压力。</li>
+                        <li>服务器问题：若多人都卡顿，可能是服务器性能不足。及时在游戏内聊天框或官方交流群告知管理员，管理员会优化服务器配置，如增加内存、调整参数。</li>
+                    </ol>
+                    
+                    <h4 class="text-md font-medium text-dark mb-2 mt-3">物品丢失</h4>
+                    <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+                        <li>先回忆是否因死亡掉落且未及时拾取，若是，回到死亡地点寻找。</li>
+                        <li>若不是，可能是插件冲突或数据异常。联系管理员，管理员会查看服务器日志排查问题，并尽力恢复数据。</li>
+                    </ol>
+                    
+                    <h4 class="text-md font-medium text-dark mb-2 mt-3">游戏模式不对</h4>
+                    <p class="text-gray-700">如果发现游戏模式（生存、创造、冒险）不符合预期，先确认服务器当前设定的游戏模式。若与自己需求不符，礼貌地向我们提出调整请求，管理员会通过控制台或配置文件修改。</p>
+                </section>
+
+                <section id="interaction" class="mb-10">
+                    <h2 class="sub-section-title">五、与其他玩家互动问题</h2>
+                    <ol class="list-decimal pl-5 space-y-3 text-gray-700">
+                        <li>
+                            <strong>遭遇恶意玩家</strong>：若遇到其他玩家破坏你的建筑、抢夺资源或语言攻击等恶意行为，不要与其对骂。立即截图保存证据，然后联系管理员，清晰说明事件经过和涉事玩家名称，管理员会依规处理。
+                        </li>
+                        <li>
+                            <strong>想与他人合作</strong>：在游戏内聊天框积极发言，主动介绍自己和想法，寻找志同道合的小伙伴；也可以加入服务器官方交流群，在群里发布合作邀请，扩大交友范围。
+                        </li>
+                    </ol>
+                </section>
+
+                <section id="plugins" class="mb-10">
+                    <h2 class="sub-section-title">六、使用插件功能 （需要在聊天框输入）</h2>
+                    
+                    <h3 class="text-lg font-semibold text-dark mb-3 mt-4">假人插件</h3>
+                    <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+                        <li>获取假人：<code>/player 《玩家名字》 spawn</code>。</li>
+                        <li>使用假人模拟：右键单击假人背包，在背包可以设置</li>
+                    </ol>
+                    
+                    <h3 class="text-lg font-semibold text-dark mb-3 mt-4">登录插件</h3>
+                    <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+                        <li>如何注册：在你登录服务器后会让你输入 <code>/register 密码 密码</code> 来注册（有空格）</li>
+                        <li>如何登录：在输入 <code>/login 密码</code> 登录。</li>
+                    </ol>
+                </section>
+
+                <section id="skins" class="mb-10">
+                    <h2 class="sub-section-title">七、想要在服务器中显示离线玩家皮肤</h2>
+                    <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+                        <li>请下载万用皮肤补丁</li>
+                        <li>请购买正版</li>
+                        <li>请使用第三方皮肤站登录（例如<a href="https://littleskin.cn" class="text-primary hover:underline" target="_blank">LittleSkin - 快速、可靠的 Minecraft 皮肤站</a>）自行问度娘。</li>
+                    </ol>
+                </section>
+
+                <section id="other-help">
+                    <h2 class="sub-section-title">八、其他帮助途径</h2>
+                    <ol class="list-decimal pl-5 space-y-3 text-gray-700">
+                        <li>
+                            <strong>官方交流群</strong>：加入服务器官方 QQ 群（待建），群里不仅能及时与管理员沟通，还能和其他玩家交流经验、分享趣事，遇到问题也能在群里提问，大家一起帮忙解决。
+                        </li>
+                        <li>
+                            <strong>官方网站</strong>：
+                            <ul class="list-disc pl-5 mt-1 space-y-1">
+                                <li>王老帅与lizhiMC服务器（机械动力1.19.2）：<a href="http://wanglaoshuai.wlssde.top" class="text-primary hover:underline" target="_blank">wanglaoshuai.wlssde.top</a></li>
+                                <li>超绝生电服务器：<a href="http://palu.wlssde.top" class="text-primary hover:underline" target="_blank">palu.wlssde.top</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>联系腐竹</strong>：wanglaoshuai720820@163.com
+                        </li>
+                        <li>
+                            我们希望这份指南能帮助你轻松应对游戏中的各种情况！如果还有其他问题，别犹豫，随时寻求帮助。祝大家在服务器中玩得开心，一起创造美好的游戏回忆！
+                        </li>
+                    </ol>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-6 mt-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa fa-gamepad text-primary text-2xl"></i>
+                        <span class="font-bold text-lg">我的世界服务器帮助指南</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-1">适用于超绝生电服务器和王老帅与lizhiMC服务器</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fa fa-question-circle text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fa fa-commenting text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fa fa-users text-xl"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
+                <div>Copyright &copy;2024 <a target="_red" style="color:#FF">王老帅与荔枝ofMCserver保留一切权力</a>. All Rights Reserved</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动端菜单
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                    
+                    // 高亮导航链接
+                    const navLinks = document.querySelectorAll('.nav-link');
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // 滚动时高亮导航链接
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                
+                if (pageYOffset >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-target') === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
